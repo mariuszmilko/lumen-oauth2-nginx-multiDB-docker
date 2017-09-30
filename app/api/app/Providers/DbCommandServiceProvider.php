@@ -14,7 +14,9 @@ class DbCommandServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('command.database.create', function () {
+
             return new \App\Console\Commands\DatabaseCreate;
+            
         });
 
         $this->commands(

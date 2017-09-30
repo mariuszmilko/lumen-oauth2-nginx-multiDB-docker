@@ -26,7 +26,7 @@ return [
             'meta'       => env('DOCTRINE_METADATA', 'annotations'),
             'connection' => 'transactions',//env('DB_CONNECTION', 'mysql'),
             'namespaces' => [
-                'App'
+                'App\\Entities'
             ],
             'paths'      => [
                 base_path('app')

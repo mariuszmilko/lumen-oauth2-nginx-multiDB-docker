@@ -57,11 +57,12 @@ class Oauth2ProxyGuard implements Guard
         // If we've already retrieved the user for the current request we can just
         // return it back immediately. We do not want to fetch the user data on
         // every call to this method because that would be tremendously slow.
+        //TODO: COOKIE Cache
         if (! is_null($this->user)) {
              return $this->user;
         }
 
-        return $this->validate($this->callback);
+        return $this->validate($this->callback) == true ? true : null;
          // return $this->user = call_user_func(
          //     $this->callback, $this->request, $this->getProvider()
          // );
@@ -77,7 +78,12 @@ class Oauth2ProxyGuard implements Guard
     {
         try {
 
-            $response = $this->proxy->request($credentials['method'], $credentials['url'], ['headers' => $credentials['headers']]);
+            $response = $this->proxy->request(
+                $credentials['method'],
+                $credentials['url'],
+                ['headers' => $credentials['headers']]
+            );
+
             return ($response->getStatusCode() == \Illuminate\Http\Response::HTTP_OK) ? true : false;
 
         } catch (RequestException $e) {

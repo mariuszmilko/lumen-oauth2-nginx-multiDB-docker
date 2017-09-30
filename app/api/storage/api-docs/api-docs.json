@@ -1,0 +1,106 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Lumen with OAUTH2 API",
+        "description": "",
+        "termsOfService": "",
+        "contact": {
+            "email": ""
+        },
+        "license": {
+            "name": "Private License",
+            "url": "URL to the license"
+        },
+        "version": "1.0.0"
+    },
+    "host": "api.mmilko.git",
+    "basePath": "/api/v1/",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "paths": {
+        "/contracts": {
+            "get": {
+                "tags": [
+                    "contracts"
+                ],
+                "summary": "List Contracts",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "createUser",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/contracts/{id}": {
+            "get": {
+                "tags": [
+                    "contracts"
+                ],
+                "summary": "Specified Contract",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "getContract",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {},
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "externalDocs": {
+        "description": "Find out more about my website",
+        "url": "http..."
+    }
+}

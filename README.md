@@ -5,9 +5,9 @@ PHP7 newest technology revision.
     - PHP 7
     - Composer
     - Lumen 5 framework
-	- Simple API protected by OAUTH2 Proxy to OAUTH2 Server
+	- Simple API protected by OAUTH2 Proxy to OAUTH2 Server (TODO: Cache Authorizied Request)
 	- Doctrine ORM with multi DB configuration (PgSql) and Doctrine ODM with (MongoDb)
-	- Swagger 3.0 documentation
+	- Swagger 3.0 documentation (http://api.mmilko.git/api/documentation)
 
 * Oauth2 Server
     - PHP 7 

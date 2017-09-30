@@ -59,12 +59,12 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
-//    App\Http\Middleware\Authenticate::class
-// ]);
+$app->middleware([
+   App\Http\Middleware\AfterResponseTypeDecoratorMiddleware::class
+]);
 
 $app->routeMiddleware([
-    'auth' => App\Http\Middleware\Authenticate::class//App\Http\Middleware\Oauth2ProxyMiddleware::class
+    'auth' => App\Http\Middleware\Authenticate::class
 ]);
 
 /*
@@ -83,6 +83,7 @@ $app->routeMiddleware([
  $app->register(LaravelDoctrine\ORM\DoctrineServiceProvider::class);
  $app->register(App\Providers\AuthServiceProvider::class);
  $app->register(\SwaggerLume\ServiceProvider::class);
+ //$app->register(\SoapBox\Formatter\FormatterServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
 /*

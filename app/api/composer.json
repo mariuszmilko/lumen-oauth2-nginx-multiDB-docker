@@ -14,6 +14,7 @@
         "nordsoftware/lumen-elasticsearch": "1.3.*",
         "darkaonline/swagger-lume": "5.5.*",
         "marcin-orlowski/laravel-api-response-builder": "4.*.*",
+        "soapbox/laravel-formatter": "2.x",
         "laravel-doctrine/orm": "1.4.*",
         "laravel-doctrine/migrations": "^1.0",
         "barryvdh/laravel-ide-helper": "^2.1",
