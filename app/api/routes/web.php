@@ -33,7 +33,7 @@ $router->group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () u
     $router->get('contracts', 'ContractController@index');
     $router->get('contracts/{id}', 'ContractController@show');
     $router->put('contracts/{id}', 'ContractController@update');
-    $router->delete('contracts/{id}', 'ContractController@destroy');
+    $router->delete('contracts/{ids}', 'ContractController@destroy');
 
     $router->get('contracts/{id}/products', 'ProductController@show');
     $router->put('contracts/{id}/products', 'ProductController@update');

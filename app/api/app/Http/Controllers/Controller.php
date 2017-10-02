@@ -28,6 +28,13 @@ use Laravel\Lumen\Routing\Controller as BaseController;
  *         name="Authorization",
  *         in="header"
  *     ), 
+ *     @SWG\SecurityScheme(
+ *   	  securityDefinition="api_access_token",
+ *        type="oauth2",
+ *        authorizationUrl="http://server.oauth2.mmilko.git/oauth/token",
+ *        flow="implicit",
+ *        scopes={}
+ *     ),
  *     @SWG\ExternalDocumentation(
  *         description="Find out more about my website",
  *         url="http..."

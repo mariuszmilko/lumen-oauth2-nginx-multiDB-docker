@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Doctrine\ORM\EntityManagerInterface;
+use App\Services\Application\IContractService;
 
 class ContractController extends Controller
 {
-    protected $em;
+    protected $contractService;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(IContractService $cs)
     {
-        $this->em = $em;
+        $this->contractService = $cs;
     }
      
     /**
@@ -24,7 +24,7 @@ class ContractController extends Controller
      *     "Bearer":{}
      *   }},   
      *   @SWG\Parameter(type="string", name="Content-Type", in="header", required=false),
-     *   @SWG\Response(response="default", description="successful operation")
+     *   @SWG\Response(response="200", description="successful operation")
      * )
      */
      /**
@@ -35,19 +35,57 @@ class ContractController extends Controller
      */
     public function index()
     {
-        $repository = $this->em->getRepository(\App\Entities\Contract::class);
+        $this->contractService->getListContracts($data);
 
         return response(['response'=> $repository->findAll()]);
     }
 
+
+     /**
+     * @SWG\Post(path="/contracts",
+     *   tags={"contracts"},
+     *   summary="Store new Contract",
+     *   description="This can only be done by the logged in user.",
+     *   operationId="getContract",
+     *   produces={"application/xml", "application/json"},
+     *   security={{
+     *     "Bearer":{}
+     *   }},   
+     * @SWG\Parameter(type="string", name="Content-Type", in="header", required=false),
+     * @SWG\Parameter(
+     *   name="contract",
+     *   in="body",
+     *   required=true,
+     *     @SWG\Schema(
+     *       required={"name"},
+     *       @SWG\Property(property="name",  type="string",  ),
+     *         @SWG\Property(
+     *           property="products",
+     *           type="array",
+     *            @SWG\Items(
+     *              type="object",
+     *              @SWG\Property(property="id", type="integer", )
+     *              ),
+     *           ),
+     *           @SWG\Property(
+     *             property="user_summary",
+     *             title="UserSummary",
+     *             @SWG\Property(property="user_id", type="integer",)
+     *            ),
+     *      ),
+     *   ),
+     *  @SWG\Response(response="201", description="successful create")
+     * )
+     */
     /**
-     * Retrieve Contract by Id
+     * Store new Contract
      *
      * @param  int $id
      * @return string Response
      */
-    public function store($id)
+    public function store(Request $request)
     {
+        $this->contractService->makeContract($data);
 
         return response(['response'=> 1]);
     }
@@ -55,7 +93,7 @@ class ContractController extends Controller
     /**
      * @SWG\Get(path="/contracts/{id}",
      *   tags={"contracts"},
-     *   summary="Specified Contract",
+     *   summary="Show Specified Contract",
      *   description="This can only be done by the logged in user.",
      *   operationId="getContract",
      *   produces={"application/xml", "application/json"},
@@ -75,36 +113,64 @@ class ContractController extends Controller
      */
     public function show($id)
     {
-        $repository = $this->em->getRepository(\App\Entities\Contract::class);
-
-        $entity = $repository->find(['id' => $id]);
-        $name = $entity->getName() ?: 'brak';
-
+        $this->contractService->getDetailContract($data);
+       
         return response(['response'=> $name]);
     }
 
-       /**
-     * Retrieve Contract by Id
-     *
-     * @param int $id
-     * @return string Response
+    /**
+     * @SWG\Delete(path="/contracts",
+     *   tags={"contracts"},
+     *   summary="Delete Specified Contract",
+     *   description="This can only be done by the logged in user.",
+     *   operationId="getContract",
+     *   produces={"application/xml", "application/json"},
+     *   security={{
+     *     "Bearer":{}
+     *   }},   
+     *   @SWG\Parameter(type="string", name="Content-Type", in="header", required=false),
+     *   @SWG\Parameter(type="string",name="ids", in="path", required=true),
+     *   @SWG\Response(response="default", description="successful operation")
+     * )
      */
-    public function destroy($id)
-    {
-
-        return response(['response'=> 1]);
-    }
-
     /**
      * Retrieve Contract by Id
      *
-     * @param int $id
+     * @param string $ids
      * @return string Response
      */
-    public function update($id)
+    public function destroy(Request $request, $ids)
     {
+        $this->contractService->cancelContract($data);
 
         return response(['response'=> 1]);
     }
+    
+    /**
+     * @SWG\Put(path="/contracts/{id}",
+     *   tags={"contracts"},
+     *   summary="Delete Specified Contract",
+     *   description="This can only be done by the logged in user.",
+     *   operationId="getContract",
+     *   produces={"application/xml", "application/json"},
+     *   security={{
+     *     "Bearer":{}
+     *   }},   
+     *   @SWG\Parameter(type="string", name="Content-Type", in="header", required=false),
+     *   @SWG\Parameter(type="integer",name="id", in="path", required=true),
+     *   @SWG\Response(response="default", description="successful operation")
+     * )
+     */
+    /**
+     * Change Contract
+     *
+     * @param int $id
+     * @return string Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->contractService->changeDetailsContract($data);
 
+        return response(['response'=> 1]);
+    }
 }

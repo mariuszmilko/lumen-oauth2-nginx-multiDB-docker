@@ -41,6 +41,106 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "contracts"
+                ],
+                "summary": "Store new Contract",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "getContract",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contract",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "required": [
+                                "name"
+                            ],
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "products": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "user_summary": {
+                                    "title": "UserSummary",
+                                    "properties": {
+                                        "user_id": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful create"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "contracts"
+                ],
+                "summary": "Delete Specified Contract",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "getContract",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "ids",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
                     "default": {
                         "description": "successful operation"
                     }
@@ -57,7 +157,43 @@
                 "tags": [
                     "contracts"
                 ],
-                "summary": "Specified Contract",
+                "summary": "Show Specified Contract",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "getContract",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "contracts"
+                ],
+                "summary": "Delete Specified Contract",
                 "description": "This can only be done by the logged in user.",
                 "operationId": "getContract",
                 "produces": [
@@ -97,6 +233,12 @@
             "type": "apiKey",
             "name": "Authorization",
             "in": "header"
+        },
+        "api_access_token": {
+            "type": "oauth2",
+            "flow": "implicit",
+            "authorizationUrl": "http://server.oauth2.mmilko.git/oauth/token",
+            "scopes": {}
         }
     },
     "externalDocs": {
