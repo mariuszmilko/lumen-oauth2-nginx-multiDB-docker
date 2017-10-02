@@ -212,6 +212,40 @@
                         "in": "path",
                         "required": true,
                         "type": "integer"
+                    },
+                    {
+                        "name": "contract",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "required": [
+                                "name"
+                            ],
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "products": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "user_summary": {
+                                    "title": "UserSummary",
+                                    "properties": {
+                                        "user_id": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 ],
                 "responses": {

@@ -158,6 +158,28 @@ class ContractController extends Controller
      *   }},   
      *   @SWG\Parameter(type="string", name="Content-Type", in="header", required=false),
      *   @SWG\Parameter(type="integer",name="id", in="path", required=true),
+     *   @SWG\Parameter(
+     *     name="contract",
+     *     in="body",
+     *     required=true,
+     *     @SWG\Schema(
+     *       required={"name"},
+     *       @SWG\Property(property="name",  type="string",  ),
+     *         @SWG\Property(
+     *           property="products",
+     *           type="array",
+     *            @SWG\Items(
+     *              type="object",
+     *              @SWG\Property(property="id", type="integer", )
+     *              ),
+     *           ),
+     *           @SWG\Property(
+     *             property="user_summary",
+     *             title="UserSummary",
+     *             @SWG\Property(property="user_id", type="integer",)
+     *            ),
+     *      ),
+     *   ),
      *   @SWG\Response(response="default", description="successful operation")
      * )
      */
