@@ -35,11 +35,10 @@ class AfterResponseTypeDecoratorMiddleware
 
             $response = $this->strategy->setFormatter($response)
                                  ->getContent($request->header('content-type'));
-
+                                 
         } catch (\Exception $e) {
 
             $error = $e->getMessage();
-           
         }
 
         return $response;

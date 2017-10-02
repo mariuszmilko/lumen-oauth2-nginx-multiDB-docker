@@ -48,17 +48,14 @@ class ResponseStrategy
         switch($content_type)
         {
             case 'application/json':
-
                 return (new Response($this->formatter->toJson(), $this->responseStatus))
-                 				 ->header('Content-Type', 'application/json');
+                 			  ->header('Content-Type', 'application/json');
             break;
-
             case 'application/xml':
     
                 return (new Response($this->formatter->toXml(), $this->responseStatus))
-             				 ->header('Content-Type', 'application/xml');
+             				  ->header('Content-Type', 'application/xml');
             break;
-
             default:
                 throw new \Exception("No Content-Type defined");
         }
