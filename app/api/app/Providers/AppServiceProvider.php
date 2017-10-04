@@ -5,6 +5,10 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Contract;
 use App\Entities\Contract as ContractEntity;
+use App\Services\Application\IContractService; 
+use App\Services\Application\ContractService;
+use App\Repositories\Contract\DoctrineContractRepository;
+use App\Repositories\Contract\IContractRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,13 +24,13 @@ class AppServiceProvider extends ServiceProvider
         	$this->app->register('Wn\Generators\CommandsServiceProvider');          
     	}
 
-        $this->app->bind('SoapBox\Formatter\Formatter', function ($app, $array) {
+        $this->app->bind(\SoapBox\Formatter\Formatter::class, function ($app, $array) {
 
             return \SoapBox\Formatter\Formatter::make($array, \SoapBox\Formatter\Formatter::ARR);
         });
 
         $this->app->bind(IContractRepository::class, function($app) {
-            // This is what Doctrine's EntityRepository needs in its constructor.
+
             return new DoctrineContractRepository(
                 $this->app['em'],
                 $this->app['em']->getClassMetaData(ContractEntity::class)
@@ -34,12 +38,10 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->bind(IContractService::class, function($app) {
-            // This is what Doctrine's EntityRepository needs in its constructor.
+
             return new ContractService(
-                IContractRepository::class
+                $this->app[IContractRepository::class]
             );
         });
-
- 
     }
 }

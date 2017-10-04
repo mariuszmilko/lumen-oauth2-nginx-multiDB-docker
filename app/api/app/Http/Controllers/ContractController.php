@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\Application\IContractService;
+use Illuminate\Http\Request;
 
 class ContractController extends Controller
 {
@@ -113,8 +114,9 @@ class ContractController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $this->contractService->getDetailContract($data);
-       
+        $res = $this->contractService->getDetailContract($data = $id);
+        $name = $res;
+
         return response(['response'=> $name]);
     }
 

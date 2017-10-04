@@ -2,9 +2,9 @@
 
 namespace App\Repositories\Contract;
 
-use App\Repositories\IEntintyManager;
+use App\Repositories\IEntityManager;
 
-interface IContractRepository extends IEntintyManager
+interface IContractRepository extends IEntityManager
 {
     public function findAll($hydrates = null);
     public function findOne($id, $hydrates = null);
