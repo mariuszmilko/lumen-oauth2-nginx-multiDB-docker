@@ -33,7 +33,7 @@ class ContractController extends Controller
      * @param 
      * @return array Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->contractService->getListContracts($data);
 
@@ -111,7 +111,7 @@ class ContractController extends Controller
      * @param  int $id
      * @return Object Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $this->contractService->getDetailContract($data);
        

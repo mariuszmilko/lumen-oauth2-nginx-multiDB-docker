@@ -8,11 +8,11 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ContractService implements  IContractService
 {
-	protected $em;
+	protected $repository;
 	
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(IContractRepository $repository)
     {
-    	$this->em = $em;
+    	$this->repository = $repository;
     }
 
     public function  makeContract($data)
@@ -22,7 +22,7 @@ class ContractService implements  IContractService
 
    public function  cancelContract($data)
    {
-
+       //$this->repository->getEntityManagerSession()->beginTransaction();
    }
    
    public function  getDetailContract($data)

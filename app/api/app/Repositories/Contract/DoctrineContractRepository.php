@@ -9,16 +9,17 @@ class DoctrineContractRepository  extends EntityRepository implements IContractR
     
     public function findAll($hydrates = null)
     {
-
+       $this->findAll();
     }
 
     public function findOne($id, $hydrates = null)
     {
-    	 $repository = $this->em->getRepository(\App\Entities\Contract::class);
+    	$query = $this->createQueryBuilder($alias, $index);
 
         $entity = $repository->find(['id' => $id]);
         $name = $entity->getName() ?: 'brak';
 
+        return $name;
     }
 
     public function update($data, $id = null)
@@ -26,24 +27,19 @@ class DoctrineContractRepository  extends EntityRepository implements IContractR
 
     }
 
-    public function delete()
+    public function remove()
     {
-    	$this->em->getConnection()->beginTransaction();
-        $repository = $this->em->criteria();
+        $repository = $this->createQueryBuilder($alias, $index);
         $idsArr = explode(',', $ids);
 
-        try {
-            foreach ($ids as $id) {
-                $entity = $repository->find(['id' => $id]);
-                $this->em->remove($entity);
-            }
-            $this->em->flush();
-            $em->getConnection()->commit();
-        } catch (\Exception $e) {
-
-             $this->em->getConnection()->rollback();
+        foreach ($ids as $id) {
+            $entity = $repository->find(['id' => $id]);
+            $this->remove($entity);
         }
+    }
 
-        $repository->clear();
+    public function getEntintyManagerSession()
+    {
+    	return $this->getEntinyManager();
     }
 }

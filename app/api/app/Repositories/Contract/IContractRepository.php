@@ -2,11 +2,14 @@
 
 namespace App\Repositories\Contract;
 
-interface IContractRepository
+use App\Repositories\IEntintyManager;
+
+interface IContractRepository extends IEntintyManager
 {
     public function findAll($hydrates = null);
-
     public function findOne($id, $hydrates = null);
-
-    public function createOrUpdate($data, $id = null);
+    public function remove($data, $id = null);
+    public function removeAll($data, $id = null);
+    public function add($data);
+    public function addAll($data);
 }

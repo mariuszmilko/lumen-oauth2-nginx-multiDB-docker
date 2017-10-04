@@ -33,6 +33,13 @@ class AppServiceProvider extends ServiceProvider
             );
         });
 
+        $this->app->bind(IContractService::class, function($app) {
+            // This is what Doctrine's EntityRepository needs in its constructor.
+            return new ContractService(
+                IContractRepository::class
+            );
+        });
+
  
     }
 }
