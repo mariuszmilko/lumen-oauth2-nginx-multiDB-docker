@@ -119,8 +119,7 @@ class ContractController extends Controller
         $validatorFactory->make(['id' => $id], ['id' => 'required|integer'], ['Brak ID'])
           ->validate();
 
-        $res = $this->contractService->getDetailContract($id);
-        $name = $res;
+        $name = $this->contractService->getDetailContract($id);
 
         return response(['response' => $name]);
     }
