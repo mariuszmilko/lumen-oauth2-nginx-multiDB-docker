@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entities;
+namespace App\Entities\Aggregates\Contract;
 
 use Doctrine\ORM\Mapping as ORM;
 

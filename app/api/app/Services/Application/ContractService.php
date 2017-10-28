@@ -13,7 +13,7 @@ class ContractService implements IContractService
 	
     public function __construct(IContractRepository $repository)
     {
-    	$this->repository = $repository;
+    	 $this->repository = $repository;
     }
     
     /**
@@ -43,7 +43,7 @@ class ContractService implements IContractService
     * Create a new middleware instance.
     *
     * @param  \Illuminate\Contracts\Auth\Factory  $auth
-    * @return void
+    * @return String $name
    */
    public function  getDetailContract($id)
    {
@@ -57,7 +57,7 @@ class ContractService implements IContractService
     * Create a new middleware instance.
     *
     * @param  \Illuminate\Contracts\Auth\Factory  $auth
-    * @return void
+    * @return  array
    */
    public function getListContracts($data)
    {
