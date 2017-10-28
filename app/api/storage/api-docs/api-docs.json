@@ -11,7 +11,7 @@
             "name": "Private License",
             "url": "URL to the license"
         },
-        "version": "1.0.0"
+        "version": "1.0.1"
     },
     "host": "api.mmilko.git",
     "basePath": "/api/v1/",

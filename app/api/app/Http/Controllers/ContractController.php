@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\Application\IContractService;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Factory;
 use Illuminate\Support\Collection;
 
 class ContractController extends Controller
@@ -113,9 +114,12 @@ class ContractController extends Controller
      * @param  int $id
      * @return Object Response
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, Factory $validatorFactory, $id)
     {
-        $res = $this->contractService->getDetailContract($data = $id);
+        $validatorFactory->make(['id' => $id], ['id' => 'required|integer'], ['Brak ID'])
+          ->validate();
+
+        $res = $this->contractService->getDetailContract($id);
         $name = $res;
 
         return response(['response' => $name]);

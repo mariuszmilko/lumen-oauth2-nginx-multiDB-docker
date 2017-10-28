@@ -59,12 +59,13 @@ return [
             'meta'       => env('DOCTRINE_METADATA', 'annotations'),
             'connection' => 'new_aggregate',//env('DB_CONNECTION', 'mysql'),
             'namespaces' => [
-                'App\\Entities\\Aggregates\\Contract',
-                'App\\Entities\\Aggregates',
+                'App\\Entities\\Aggregates\\Contract'
             ],
             'paths'      => [
                 base_path('app')
             ],
+            'metadata_cache_driver' => 'apc',
+            'query_cache_driver' => 'apc',
             'repository' => Doctrine\ORM\EntityRepository::class,
             'proxies'    => [
                 'namespace'     => false,

@@ -3,12 +3,15 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\Factory;
+use Illuminate\Http\Response;
 use App\Repositories\Contract;
-use App\Entities\Contract as ContractEntity;
+use App\Entities\Aggregates\Contract\Contract as ContractEntity;
 use App\Services\Application\IContractService; 
 use App\Services\Application\ContractService;
 use App\Repositories\Contract\DoctrineContractRepository;
 use App\Repositories\Contract\IContractRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,25 +27,40 @@ class AppServiceProvider extends ServiceProvider
         	$this->app->register('Wn\Generators\CommandsServiceProvider');          
     	}
 
-        $this->app->bind(\SoapBox\Formatter\Formatter::class, function ($app, $array) {
+        $this->app->bind(\SoapBox\Formatter\Formatter::class, function ($app, $params) {
 
-            return \SoapBox\Formatter\Formatter::make($array, \SoapBox\Formatter\Formatter::ARR);
+            return \SoapBox\Formatter\Formatter::make($params, \SoapBox\Formatter\Formatter::ARR);
         });
 
         $this->app->bind(IContractRepository::class, function($app) {
 
             return new DoctrineContractRepository(
-                $this->app['em']->getManagerForClass(ContractEntity::class),
-                $this->app['em']->getClassMetaData(ContractEntity::class)
+                $app[ManagerRegistry::class]->getManagerForClass(ContractEntity::class),
+                $app['em']->getClassMetaData(ContractEntity::class)
             );
         });
 
         $this->app->bind(IContractService::class, function($app) {
 
             return new ContractService(
-                $this->app[IContractRepository::class]
+                $app[IContractRepository::class]
             );
         });
+
+        $this->app->bind(Factory::class, function($app) {
+
+            return new Factory(
+                $app['translator'], $app 
+            );
+        });
+
+        $this->app->bind(Response::class, function($app, $params) {
+
+            return new Response(
+                $params['type'], $params['status']
+            );
+        });
+        
        //Multiple implementations for one interfaces 
        // $this->app->when('App\Handlers\Commands\CreateOrderHandler')
        //    ->needs('App\Contracts\EventPusher')

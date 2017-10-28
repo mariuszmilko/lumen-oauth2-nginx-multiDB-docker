@@ -5,7 +5,7 @@ namespace App\Entities\Aggregates\Contract;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * App\Entities\Product
+ * App\Entities\Aggregates\Contract\Product
  *
  *
  * @ORM\Entity

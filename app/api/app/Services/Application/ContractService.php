@@ -9,7 +9,7 @@ use App\Repositories\Contract\IContractRepository;
 
 class ContractService implements IContractService
 {
-	protected $repository;
+	  protected $repository;
 	
     public function __construct(IContractRepository $repository)
     {

@@ -3,7 +3,6 @@
 namespace App\Services\Http;
 
 use Illuminate\Support\Facades\App;
-use Illuminate\Http\Response;
 
 class ResponseStrategy
 {
@@ -48,16 +47,21 @@ class ResponseStrategy
         switch($content_type)
         {
             case 'application/json':
-                return (new Response($this->formatter->toJson(), $this->responseStatus))
+                return $this->getResponseInstance($this->formatter->toJson(), $this->responseStatus)
                  			  ->header('Content-Type', 'application/json');
             break;
             case 'application/xml':
     
-                return (new Response($this->formatter->toXml(), $this->responseStatus))
+                return $this->getResponseInstance($this->formatter->toXml(), $this->responseStatus)
              				  ->header('Content-Type', 'application/xml');
             break;
             default:
                 throw new \Exception("No Content-Type defined");
         }
+    }
+
+    private function getResponseInstance($type, $status)
+    {
+        return $this->app->makeWith('Illuminate\Http\Response', ['type' => $type, 'status' => $status]);
     }
 }
