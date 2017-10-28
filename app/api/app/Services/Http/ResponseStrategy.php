@@ -59,7 +59,14 @@ class ResponseStrategy
                 throw new \Exception("No Content-Type defined");
         }
     }
-
+    
+    /**
+    * Set the content_type
+    *
+    * @param  string $type
+    * @param  integer $status
+    * @return Illuminate\Http\Response $response
+    */
     private function getResponseInstance($type, $status)
     {
         return $this->app->makeWith('Illuminate\Http\Response', ['type' => $type, 'status' => $status]);
