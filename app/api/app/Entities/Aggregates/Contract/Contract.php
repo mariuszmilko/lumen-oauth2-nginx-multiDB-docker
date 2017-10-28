@@ -70,9 +70,9 @@ class Contract
 
 	public function getDetailsContract()
 	{
-		$products = [];
+	    $products = [];
         foreach ($this->getProducts() as $p) {
-            $products[] = ['name' => $p->getName()];
+           $products[] = ['name' => $p->getName()];
         }
 
         $data = ['name' => $this->getName(),
