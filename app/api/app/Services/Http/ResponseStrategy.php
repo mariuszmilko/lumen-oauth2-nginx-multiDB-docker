@@ -61,7 +61,7 @@ class ResponseStrategy
     }
     
     /**
-    * Set the content_type
+    * Set the response
     *
     * @param  string $type
     * @param  integer $status
