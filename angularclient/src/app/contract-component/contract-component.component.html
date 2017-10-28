@@ -1,0 +1,12 @@
+<p>
+  contract-component works!
+</p>
+
+<div *ngIf="contract">
+    <h2>{{contract.name}} details!</h2>
+    <div><label>id: </label>{{contract.id}}</div>
+    <div>
+      <label>name: </label>
+      <input [(ngModel)]="contract.name" placeholder="name">
+    </div>
+</div>

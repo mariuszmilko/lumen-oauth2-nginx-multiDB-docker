@@ -19,7 +19,7 @@ class ContractService implements IContractService
     /**
      * Create a new middleware instance.
      *
-     * @param  \Illuminate\Contracts\Auth\Factory  $auth
+     * @param  array or dto $data
      * @return void
     */
     public function  makeContract($data)
@@ -45,9 +45,9 @@ class ContractService implements IContractService
     * @param  \Illuminate\Contracts\Auth\Factory  $auth
     * @return void
    */
-   public function  getDetailContract($data)
+   public function  getDetailContract($id)
    {
-   	  $entity = $this->repository->findOne($data);
+   	  $entity = $this->repository->findOne($id);
       $name = $entity->getName() ?: 'brak';
 
       return 'detailContract '.$name;

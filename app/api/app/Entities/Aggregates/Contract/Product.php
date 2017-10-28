@@ -37,27 +37,33 @@ class Product
      */
     private $contract;
 
-    public function getId(){
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function setId($id){
+    public function setId($id)
+    {
         $this->id = $id;
     }
 
-    public function getName(){
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function setName($name){
+    public function setName($name)
+    {
         $this->name = $name;
     }
 
-    public function getContract(){
+    public function getContract()
+    {
         return $this->contract;
     }
 
-    public function setContract($contract){
+    public function setContract($contract)
+    {
         $this->contract = $contract;
     }
 }

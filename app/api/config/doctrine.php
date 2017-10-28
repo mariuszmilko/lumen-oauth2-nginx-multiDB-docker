@@ -31,6 +31,40 @@ return [
             'paths'      => [
                 base_path('app')
             ],
+            'metadata_cache_driver' => 'apc',
+            'query_cache_driver' => 'apc',
+            'repository' => Doctrine\ORM\EntityRepository::class,
+            'proxies'    => [
+                'namespace'     => false,
+                'path'          => storage_path('proxies'),
+                'auto_generate' => env('DOCTRINE_PROXY_AUTOGENERATE', false)
+            ],
+            /*
+            |--------------------------------------------------------------------------
+            | Doctrine events
+            |--------------------------------------------------------------------------
+            |
+            | The listener array expects the key to be a Doctrine event
+            | e.g. Doctrine\ORM\Events::onFlush
+            |
+            */
+            'events'     => [
+                'listeners'   => [],
+                'subscribers' => []
+            ],
+            'filters'    => []
+        ],
+         'new_aggregate' => [
+            'dev'        => env('APP_DEBUG'),
+            'meta'       => env('DOCTRINE_METADATA', 'annotations'),
+            'connection' => 'new_aggregate',//env('DB_CONNECTION', 'mysql'),
+            'namespaces' => [
+                'App\\Entities\\Aggregates\\Contract',
+                'App\\Entities\\Aggregates',
+            ],
+            'paths'      => [
+                base_path('app')
+            ],
             'repository' => Doctrine\ORM\EntityRepository::class,
             'proxies'    => [
                 'namespace'     => false,

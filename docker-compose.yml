@@ -96,6 +96,26 @@ services:
       - "3306"
     volumes:
       - ./tmp/mysql/data/db:/var/lib/mysql
+  angular_dev:
+    container_name: angular_dev
+    image: trion/ng-cli
+    ports: 
+      - "4200:4200"
+    command: ng serve -host 0.0.0.0
+    user: "1000:1000"
+    expose:
+      - "4200"
+    volumes:
+      - "$PWD/angularclient:/app" 
+    networks:
+     net:
+      ipv4_address: 172.28.0.7
+    links:
+      - web
+    extra_hosts:
+      - "api.mmilko.git:172.28.0.5"
+      - "server.oauth2.mmilko.git:172.28.0.5"
+  # angular test # docker run -u $(id -u) --rm -v "$PWD":/app trion/ng-cli-karma ng test --watch false
 networks:
     net:
       ipam:

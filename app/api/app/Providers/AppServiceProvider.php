@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IContractRepository::class, function($app) {
 
             return new DoctrineContractRepository(
-                $this->app['em'],
+                $this->app['em']->getManagerForClass(ContractEntity::class),
                 $this->app['em']->getClassMetaData(ContractEntity::class)
             );
         });
@@ -43,5 +43,10 @@ class AppServiceProvider extends ServiceProvider
                 $this->app[IContractRepository::class]
             );
         });
+       //Multiple implementations for one interfaces 
+       // $this->app->when('App\Handlers\Commands\CreateOrderHandler')
+       //    ->needs('App\Contracts\EventPusher')
+       //    ->give('App\Services\PubNubEventPusher');
+
     }
 }

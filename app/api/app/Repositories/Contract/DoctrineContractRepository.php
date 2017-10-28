@@ -14,6 +14,9 @@ class DoctrineContractRepository  extends EntityRepository implements IContractR
     */
     public function findAll($hydrates = null)
     {
+	   //$query = $em->createQuery("SELECT u FROM MyProject\User u");
+	   // $query->setFetchMode("MyProject\User", "address", \Doctrine\ORM\Mapping\ClassMetadata::FETCH_EAGER);
+	   // $query->execute();
        $this->findAll();
     }
     

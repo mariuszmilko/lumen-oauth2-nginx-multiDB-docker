@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\Application\IContractService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class ContractController extends Controller
 {
@@ -36,9 +37,9 @@ class ContractController extends Controller
      */
     public function index(Request $request)
     {
-        $this->contractService->getListContracts($data);
+        $contracts = $this->contractService->getListContracts($data);
 
-        return response(['response'=> $repository->findAll()]);
+        return response(['response' => $contracts]);
     }
 
 
@@ -88,7 +89,7 @@ class ContractController extends Controller
     {
         $this->contractService->makeContract($data);
 
-        return response(['response'=> 1]);
+        return response(['response' => 1]);
     }
 
     /**
@@ -117,7 +118,7 @@ class ContractController extends Controller
         $res = $this->contractService->getDetailContract($data = $id);
         $name = $res;
 
-        return response(['response'=> $name]);
+        return response(['response' => $name]);
     }
 
     /**
@@ -145,7 +146,7 @@ class ContractController extends Controller
     {
         $this->contractService->cancelContract($data);
 
-        return response(['response'=> 1]);
+        return response(['response' => 1]);
     }
     
     /**
@@ -195,6 +196,6 @@ class ContractController extends Controller
     {
         $this->contractService->changeDetailsContract($data);
 
-        return response(['response'=> 1]);
+        return response(['response' => 1]);
     }
 }

@@ -24,7 +24,8 @@
         "beberlei/DoctrineExtensions": "^1.0",
         "mongodb/mongodb": "1.2.0-alpha1",
         "alcaeus/mongo-php-adapter": "*",
-        "guzzlehttp/guzzle": "6.3.*"
+        "guzzlehttp/guzzle": "6.3.*",
+        "doctrine/collections" : "1.5.*"
     },
     "provide": {
     "ext-mongo": "1.6.14"

@@ -38,27 +38,46 @@ class Contract
     private $products;
 
 
-    public function getId(){
+    public function getId()
+    {
 		return $this->id;
 	}
 
-	public function setId($id){
+	public function setId($id)
+    {
 		$this->id = $id;
 	}
 
-	public function getName(){
+	public function getName()
+    {
 		return $this->name;
 	}
 
-	public function setName($name){
+	public function setName($name)
+    {
 		$this->name = $name;
 	}
 
-	public function getProducts(){
+	public function getProducts()
+    {
 		return $this->products;
 	}
 
-	public function setProducts($products){
+	public function setProducts($products)
+    {
 		$this->products = $products;
+	}
+
+	public function getDetailsContract()
+	{
+		$products = [];
+        foreach ($this->getProducts() as $p) {
+            $products[] = ['name' => $p->getName()];
+        }
+
+        $data = ['name' => $this->getName(),
+        		 'products' => $products];
+
+        return $data;
 	}
 }
