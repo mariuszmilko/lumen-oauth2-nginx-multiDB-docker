@@ -1,5 +1,5 @@
 # lumen-oauth2-nginx-multiDB-docker
-PHP7 newest technology revision.
+PHP7 newest technologies revision.
 
 * APP API
     - PHP 7
