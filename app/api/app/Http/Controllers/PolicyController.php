@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\Application\IPolicyService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Validation\Factory;
 use Illuminate\Support\Collection;
 use Nord\Lumen\Fractal\FractalService;
@@ -44,6 +45,6 @@ class PolicyController extends Controller
         $policies = $this->policyService->getListPolicy([]);
         $response = $fractal->collection($policies, $policy)->toArray();
 
-        return response(['response' => $response]);
+        return response(['response' => $response], Response::HTTP_OK);
     }
 }
