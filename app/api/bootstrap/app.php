@@ -79,10 +79,12 @@ $app->routeMiddleware([
 */
 
  $app->register(App\Providers\AppServiceProvider::class);
+  $app->register(App\Providers\DomainServiceProvider::class);
  $app->register(App\Providers\DbCommandServiceProvider::class);
  $app->register(LaravelDoctrine\ORM\DoctrineServiceProvider::class);
  $app->register(App\Providers\AuthServiceProvider::class);
  $app->register(\SwaggerLume\ServiceProvider::class);
+ $app->register(\Nord\Lumen\Fractal\FractalServiceProvider::class);
  //$app->register(\SoapBox\Formatter\FormatterServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 

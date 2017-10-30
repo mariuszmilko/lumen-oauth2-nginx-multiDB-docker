@@ -17,6 +17,8 @@ use App\Repositories\Contract\IContractRepository;
 use App\Repositories\Policy\DoctrinePolicyRepository;
 use App\Repositories\Policy\IPolicyRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use App\Services\Application\Transformers\PolicyTransformer;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -37,42 +39,6 @@ class AppServiceProvider extends ServiceProvider
             return \SoapBox\Formatter\Formatter::make($params, \SoapBox\Formatter\Formatter::ARR);
         });
 
-        $this->app->bind(IContractRepository::class, function($app) {
-           
-           //$em = $app[ManagerRegistry::class]->getManagerForClass(ContractEntity::class);
-            $em = $app[ManagerRegistry::class]->getManager(env('DB_API_CONTRACT_MANAGERNAME'));
-
-            return new DoctrineContractRepository(
-                $em,
-                $em->getClassMetaData(ContractEntity::class)
-            );
-        });
-
-        $this->app->bind(IContractService::class, function($app) {
-
-            return new ContractService(
-                $app[IContractRepository::class]
-            );
-        });
-
-        $this->app->bind(IPolicyRepository::class, function($app) {
-
-            $em = $app[ManagerRegistry::class]->getManager(env('DB_API_POLICIES_MANAGERNAME'));
-            //getManagerForClass(PolicyEntity::class);
-
-            return new DoctrinePolicyRepository(
-                $em,
-                $em->getClassMetaData(PolicyEntity::class)
-            );
-        });
-
-        $this->app->bind(IPolicyService::class, function($app) {
-
-            return new PolicyService(
-                $app[IPolicyRepository::class]
-            );
-        });
-
         $this->app->bind(Factory::class, function($app) {
 
             return new Factory(
@@ -87,10 +53,9 @@ class AppServiceProvider extends ServiceProvider
             );
         });
 
-       //Multiple implementations for one interfaces 
-       // $this->app->when('App\Handlers\Commands\CreateOrderHandler')
-       //    ->needs('App\Contracts\EventPusher')
-       //    ->give('App\Services\PubNubEventPusher');
+        $this->app->bind(PolicyTransformer::class, function($app) {
 
+            return new PolicyTransformer();
+        });
     }
 }

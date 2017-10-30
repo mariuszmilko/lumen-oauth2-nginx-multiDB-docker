@@ -6,6 +6,8 @@ use App\Services\Application\IPolicyService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Factory;
 use Illuminate\Support\Collection;
+use Nord\Lumen\Fractal\FractalService;
+use App\Services\Application\Transformers\PolicyTransformer;
 
 class PolicyController extends Controller
 {
@@ -36,10 +38,12 @@ class PolicyController extends Controller
      * @param 
      * @return array Response
      */
-    public function index(Request $request)
+    public function index(Request $request, FractalService $fractal, PolicyTransformer $policy)
     {
+        //$policies = $this->policyServiceTransformer($this->policyService)->getListPolicy([]);
         $policies = $this->policyService->getListPolicy([]);
+        $response = $fractal->collection($policies, $policy)->toArray();
 
-        return response(['response' => $policies]);
+        return response(['response' => $response]);
     }
 }

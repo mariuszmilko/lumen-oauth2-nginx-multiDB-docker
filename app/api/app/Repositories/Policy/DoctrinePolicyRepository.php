@@ -12,12 +12,12 @@ class DoctrinePolicyRepository  extends EntityRepository implements IPolicyRepos
 	   //$this->findAll();	
 	   $entity = $this->find(['id' => 1]);
 
-       return $entity->getName();//new \Doctrine\Common\Collections\ArrayCollection();
+       return new \Doctrine\Common\Collections\ArrayCollection([$entity]);
 	}
 
     public function findOne($id, $hydrates = null)
     {
-    	
+
       return $this->find(['id' => 1]);
     }
 
