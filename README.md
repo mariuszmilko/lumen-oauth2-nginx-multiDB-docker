@@ -27,5 +27,5 @@ PHP7 newest technologies revision to create REST API.
     
 * Git  version control system
 
-* Angular 4 - client for API with credentials
+* Angular 4 - client for API with credentials (TODO: login component, list component, client api service)
 
