@@ -259,6 +259,38 @@
                     }
                 ]
             }
+        },
+        "/policies": {
+            "get": {
+                "tags": [
+                    "policies"
+                ],
+                "summary": "List Policies",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "listPolicies",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
         }
     },
     "definitions": {},

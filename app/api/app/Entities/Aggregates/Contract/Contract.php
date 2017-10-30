@@ -37,6 +37,13 @@ class Contract
      */
     private $products;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     public function getId()
     {

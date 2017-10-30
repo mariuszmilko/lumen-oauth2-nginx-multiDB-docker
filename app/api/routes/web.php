@@ -27,7 +27,6 @@ $router->group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () u
     $router->get('version', function () {
         return 'api.v1';
     });
-    //$router->get('user', 'ExampleController@show');
 
     $router->post('contracts', 'ContractController@store');
     $router->get('contracts', 'ContractController@index');
@@ -38,5 +37,7 @@ $router->group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () u
     $router->get('contracts/{id}/products', 'ProductController@show');
     $router->put('contracts/{id}/products', 'ProductController@update');
     $router->delete('contracts/{id}/products', 'ProductController@destroy');
+
+    $router->get('policies', 'PolicyController@index');
 
 });

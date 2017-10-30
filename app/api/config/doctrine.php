@@ -24,7 +24,7 @@ return [
         'default' => [
             'dev'        => env('APP_DEBUG'),
             'meta'       => env('DOCTRINE_METADATA', 'annotations'),
-            'connection' => 'transactions',//env('DB_CONNECTION', 'mysql'),
+            'connection' => env('DB_TRANS_MANAGERNAME'),//env('DB_CONNECTION', 'mysql'),
             'namespaces' => [
                 'App\\Entities'
             ],
@@ -54,12 +54,45 @@ return [
             ],
             'filters'    => []
         ],
-         'new_aggregate' => [
+         env('DB_API_CONTRACT_MANAGERNAME') => [
             'dev'        => env('APP_DEBUG'),
             'meta'       => env('DOCTRINE_METADATA', 'annotations'),
-            'connection' => 'new_aggregate',//env('DB_CONNECTION', 'mysql'),
+            'connection' => env('DB_API_CONTRACT_MANAGERNAME'),//env('DB_CONNECTION', 'mysql'),
             'namespaces' => [
                 'App\\Entities\\Aggregates\\Contract'
+            ],
+            'paths'      => [
+                base_path('app')
+            ],
+            'metadata_cache_driver' => 'apc',
+            'query_cache_driver' => 'apc',
+            'repository' => Doctrine\ORM\EntityRepository::class,
+            'proxies'    => [
+                'namespace'     => false,
+                'path'          => storage_path('proxies'),
+                'auto_generate' => env('DOCTRINE_PROXY_AUTOGENERATE', false)
+            ],
+            /*
+            |--------------------------------------------------------------------------
+            | Doctrine events
+            |--------------------------------------------------------------------------
+            |
+            | The listener array expects the key to be a Doctrine event
+            | e.g. Doctrine\ORM\Events::onFlush
+            |
+            */
+            'events'     => [
+                'listeners'   => [],
+                'subscribers' => []
+            ],
+            'filters'    => []
+        ],
+        env('DB_API_POLICIES_MANAGERNAME') => [
+            'dev'        => env('APP_DEBUG'),
+            'meta'       => env('DOCTRINE_METADATA', 'annotations'),
+            'connection' => env('DB_API_POLICIES_MANAGERNAME'),//env('DB_CONNECTION', 'mysql'),
+            'namespaces' => [
+                'App\\Entities\\Aggregates\\Policy'
             ],
             'paths'      => [
                 base_path('app')
